@@ -3,7 +3,6 @@ linter:
   rules:
       always_declare_return_types: true
       always_put_control_body_on_new_line: true
-      always_specify_types: true
       annotate_overrides: true
       package_api_docs: true
       prefer_adjacent_string_concatenation: true
@@ -15,3 +14,7 @@ linter:
       camel_case_types: false
       avoid_print: false
       constant_identifier_names: false
+analyzer:
+  errors:
+      unused_element: false
+      unused_field: false
