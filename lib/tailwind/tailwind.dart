@@ -7,18 +7,18 @@ final Tailwind tailwind = Tailwind();
 
 class Tailwind {
   final AudioPlayer _player1, _player2;
-  final ListQueue<Source> audioQueue;
+  final ListQueue<Source> _audioQueue;
 
   Tailwind()
       : _player1 = AudioPlayer(),
         _player2 = AudioPlayer(),
-        audioQueue = ListQueue<Source>();
+        _audioQueue = ListQueue<Source>();
 
   /// Procures an [AudioPlayer] instance to be set with a source
   /// This should be used with caution if the AudioPlayer is still in the process of playing
   void _load(AudioPlayer player, Source source) => player.setSource(source);
 
-  void enqueue(Source source) => audioQueue.add(source);
+  void enqueue(Source source) => _audioQueue.add(source);
 }
 
 class TailwindModel extends ChangeNotifier {}
@@ -29,7 +29,7 @@ typedef TAudioFileFormatInfo = ({
   String formalName,
 });
 
-final supportedFormats = List.unmodifiable(<TAudioFileFormatInfo>[
+final TSupportedFormats = List.unmodifiable(<TAudioFileFormatInfo>[
   (id: "MP3", endings: ["mp3"], formalName: "MPEG Audio Layer III"),
   (id: "WAV", endings: ["wav"], formalName: "WaveForm"),
   (id: "OGG", endings: ["ogg", "opus", "oga"], formalName: "OGG"),
