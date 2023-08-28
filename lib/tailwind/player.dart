@@ -1,7 +1,6 @@
 import 'dart:collection';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:halcyon/defs.dart';
 import 'package:halcyon/logger.dart';
 import 'package:halcyon/tailwind/tailwind.dart';
 
@@ -22,9 +21,8 @@ class Tailwind {
       : queue = ListQueue(),
         _player = AudioPlayer(),
         _pointer = 0 {
-    if (DEBUG_TAILWIND) {
-      _player.eventStream.listen((event) => log(LogLevel.LOW, "Received an AUDIO_EVENT of [${event.eventType.name.toUpperCase()}] @ ${event.position}"));
-    }
+    /// TODO: Add the proper checks for the DEBUG from tailwind_defs
+    _player.eventStream.listen((event) => log(LogLevel.LOW, "Received an AUDIO_EVENT of [${event.eventType.name.toUpperCase()}] @ ${event.position}"));
   }
 
   /// Gets the current track at the current pointer

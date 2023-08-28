@@ -1,4 +1,4 @@
-import 'package:halcyon/tailwind/tailwind_player.dart';
+import 'package:halcyon/tailwind/player.dart';
 import 'package:flutter/material.dart';
 
 /// Represents a standard
