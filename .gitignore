@@ -25,3 +25,9 @@ app.*.symbols
 .vscode
 app.*.map.json
 *.mp3
+*.ogg
+*.oga
+*.wav
+*.flac
+*.aac
+*.m4a
