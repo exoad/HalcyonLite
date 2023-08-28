@@ -18,3 +18,4 @@ analyzer:
   errors:
       unused_element: false
       unused_field: false
+      prefer_final_fields: false

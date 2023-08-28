@@ -33,6 +33,6 @@ List<String> T_supportedEndings() {
   return res;
 }
 
-final Tailwind tailwind = Tailwind();
+final TailwindModel tailwind = TailwindModel();
 
 class TailwindModel extends Tailwind with ChangeNotifier {}
