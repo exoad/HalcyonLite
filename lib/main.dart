@@ -11,13 +11,23 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      debugShowMaterialGrid: false,
       home: Scaffold(
-        body: Center(
-            child: Column(children: [
-          ChangeNotifierProvider(create: (_) {}, child: const Text("yes")),
-        ])),
+        body: Center(child: HApp()),
       ),
     );
+  }
+}
+
+class HApp extends StatelessWidget {
+  const HApp({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider.value(value: null, child: Column(children: []));
   }
 }

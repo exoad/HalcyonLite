@@ -5,7 +5,7 @@
 #include <gdk/gdkx.h>
 #endif
 
-#include "HConstants.h"
+#include "../native/HConstants.h"
 #include "flutter/generated_plugin_registrant.h"
 
 struct _MyApplication {
@@ -36,6 +36,7 @@ static void my_application_activate(GApplication* application) {
     gtk_header_bar_set_title(header_bar, Halcyon::LINUX_WINDOW_TITLE);
     gtk_header_bar_set_show_close_button(header_bar, TRUE);
     gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
+    gtk_window_set_icon_from_file(window, Halcyon::LINUX_WINDOW_ICON512, NULL);
   } else {
     gtk_window_set_title(window, Halcyon::LINUX_WINDOW_TITLE);
   }
