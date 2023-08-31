@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:halcyon/tailwind/tailwind.dart';
+import 'package:halcyon/util/io.dart';
 import 'package:provider/provider.dart';
 
 /// This is the main entrypoint into the Halcyon program.
 void main() {
+  hInitDir();
+
   runApp(const MainApp());
 }
 

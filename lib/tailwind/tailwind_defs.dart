@@ -5,7 +5,7 @@ part 'tailwind_defs.g.dart';
 /// This class represents the Configuration JSON file for the Tailwind audio player.
 @JsonSerializable(checked: true)
 class TConfig {
-  /// Represents whether or not to log debug messages generated from tailwind
+  /// Represents whether or not to use debug features for tailwind
   @JsonKey(defaultValue: false, name: "T_debug")
   final bool? debug;
 

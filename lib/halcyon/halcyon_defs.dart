@@ -14,12 +14,14 @@ final List<String> HFOLDER_SUBFOLDERS = List.unmodifiable(["config", "cache"]);
 @JsonSerializable(checked: true)
 class HConfig {
   /// If debug information should be shown
-  ///
-  /// These can be visual information or just console logs.
   @JsonKey(defaultValue: true, name: "H_debug")
   final bool? debug;
 
-  HConfig({required this.debug});
+  /// If console logging information should be shown
+  @JsonKey(defaultValue: true, name: "use_logging")
+  final bool? useLogger;
+
+  HConfig({required this.debug, required this.useLogger});
 
   factory HConfig.fromJson(Map<String, dynamic> json) => _$HConfigFromJson(json);
 

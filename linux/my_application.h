@@ -1,5 +1,5 @@
-#ifndef FLUTTER_MY_APPLICATION_H_
-#define FLUTTER_MY_APPLICATION_H_
+#ifndef HALCYON_APP_FLUTTER_MAIN_H_
+#define HALCYON_APP_FLUTTER_MAIN_H_
 
 #include <gtk/gtk.h>
 
