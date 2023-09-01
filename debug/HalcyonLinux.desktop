@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=halcyon
+Version=1.0
+Icon=icon.png
+Comment=Halcyon desktop music player
+Categories=Audio;
+Terminal=true
+StartupNotify=
+Exec=./../build/linux/x64/debug/bundle/halcyon
