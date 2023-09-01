@@ -3,16 +3,26 @@ import 'dart:io';
 
 import 'package:halcyon/halcyon/halcyon_defs.dart';
 
-typedef HFileCreationConf = ({String content, FileMode mode, Encoding encoding, bool autoFlush});
+typedef HFileCreationConf = ({
+  String content,
+  FileMode mode,
+  Encoding encoding,
+  bool autoFlush
+});
 
 /// Initializes the Halcyon working folder for things like configuration, caching, and more.
 ///
 /// Should be mainly called **once** at the start of the program
-void hInitDir() {
+void hInitDir({bool asyncCreate = false}) {
   Directory("./$HFOLDER_NAME").create();
-
-  for (var x in HFOLDER_SUBFOLDERS) {
-    Directory("./$HFOLDER_NAME/$x").create();
+  if (asyncCreate) {
+    for (var x in HFOLDER_SUBFOLDERS) {
+      Directory("./$HFOLDER_NAME/$x").create();
+    }
+  } else {
+    for (var x in HFOLDER_SUBFOLDERS) {
+      Directory("./$HFOLDER_NAME/$x").createSync();
+    }
   }
 }
 
@@ -28,11 +38,17 @@ Future<File> hCreateFileIfNotExist(String fileDir) async {
 }
 
 /// Writes to a file and checks if the file exists.
-Future<File> hCreateFileIfNotExistAndWrite(String fileDir, HFileCreationConf conf) async {
+Future<File> hCreateFileIfNotExistAndWrite(
+    String fileDir, HFileCreationConf conf) async {
   File e = await hCreateFileIfNotExist(fileDir);
-  return e.writeAsString(conf.content, mode: conf.mode, encoding: conf.encoding, flush: conf.autoFlush);
+  return e.writeAsString(conf.content,
+      mode: conf.mode,
+      encoding: conf.encoding,
+      flush: conf.autoFlush);
 }
 
-const JsonEncoder _jsonEncoder = JsonEncoder.withIndent("                ");
+const JsonEncoder _jsonEncoder =
+    JsonEncoder.withIndent("                ");
 
-String hPrettifyJSON(dynamic uglyJson) => _jsonEncoder.convert(uglyJson);
+String hPrettifyJSON(dynamic uglyJson) =>
+    _jsonEncoder.convert(uglyJson);

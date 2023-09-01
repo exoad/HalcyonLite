@@ -19,3 +19,4 @@ analyzer:
       unused_element: false
       unused_field: false
       prefer_final_fields: false
+      curly_braces_in_flow_control_structures: false

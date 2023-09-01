@@ -1,39 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:halcyon/tailwind/tailwind.dart';
+import 'package:halcyon/halcyon/halcyon.dart';
+import 'package:halcyon/util/debug.dart';
 import 'package:halcyon/util/io.dart';
+import 'package:halcyon/util/logger.dart';
 import 'package:halcyon/util/user.dart';
-import 'package:provider/provider.dart';
 
 /// This is the main entrypoint into the Halcyon program.
 void main() {
+  Stopwatch startUpTime = Stopwatch()..start();
+  log(LogLevel.LOW, "Starting up...");
   hInitDir();
   hEnsureMasterProperties();
-
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      debugShowMaterialGrid: false,
-      home: Scaffold(
-        body: Center(child: HApp()),
-      ),
-    );
-  }
-}
-
-class HApp extends StatelessWidget {
-  const HApp({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(value: tailwind, child: const Column(children: [Text("Hi")]));
-  }
+  runApp(const HApp());
+  hDebugInitLoggingListeners();
+  log(LogLevel.MEDIUM,
+      "Halcyon started up in: ${startUpTime.elapsed}");
+  startUpTime.stop();
 }

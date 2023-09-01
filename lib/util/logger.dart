@@ -5,10 +5,9 @@ var _logContents = <String>[];
 /// [LogLevel] specifies how dangerous a log is and how far it should be prioritized to be shown to
 /// the user or the developer.
 enum LogLevel {
-  LOW("LO"),
-  MEDIUM("ME"),
-  HIGH("HI"),
-  EXTREME("EX");
+  LOW("INFO"),
+  MEDIUM("WARN"),
+  HIGH("HIGH");
 
   final String str;
   const LogLevel(this.str);

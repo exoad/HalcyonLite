@@ -23,23 +23,22 @@ HSystemOS get() => Platform.isLinux
             ? HSystemOS.OSX
             : HSystemOS.UNKNOWN;
 
-void hEnsureMasterProperties() async {
+void hEnsureMasterProperties() {
   File f = File("$HFOLDER_NAME/config/$HMASTERCONF_NAME");
-  if (await f.exists()) {
+  if (f.existsSync()) {
     // Here we read the contents of the file and push it back to the Halcyon_Defs and Tailwind Defs respectively.
-    dynamic config = json.decode(await f.readAsString());
+    dynamic config = json.decode(f.readAsStringSync());
     AppConstants.hConf = HConfig.fromJson(config);
     log(LogLevel.MEDIUM, "Load [HConfig] -> [FileSys]");
   } else {
     // Here we assign the default values to the respective Halcyon and Tailwind defs
     AppConstants.hConf = HConfig.fromJson({});
-
     // Create the file
     f.create(recursive: true);
-    f.writeAsString(hPrettifyJSON(AppConstants.hConf.toJson()));
-
+    f.writeAsString(
+        hPrettifyJSON(AppConstants.hConf.toJson()));
     log(LogLevel.HIGH, "Loading [HConfig] -> [Defaults]");
   }
-
-  log(LogLevel.MEDIUM, "Loaded [HConfig] with [${AppConstants.hConf.toJson().length}] properties");
+  log(LogLevel.MEDIUM,
+      "Loaded [HConfig] with [${AppConstants.hConf.toJson().length}] properties");
 }
