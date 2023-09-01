@@ -10,18 +10,21 @@ const String HFOLDER_NAME = ".halcyon";
 const String HMASTERCONF_NAME = "app_config.json";
 
 /// Every subfolder to be created under [HFOLDER_NAME]
-final List<String> HFOLDER_SUBFOLDERS = List.unmodifiable(["config", "cache"]);
+final List<String> HFOLDER_SUBFOLDERS =
+    List.unmodifiable(["config", "cache", "logs"]);
 
 /// Represents the default Halcyon configuration JSON
-@JsonSerializable(checked: true, disallowUnrecognizedKeys: false)
+@JsonSerializable(
+    checked: true, disallowUnrecognizedKeys: false)
 class HConfig {
   /// If debug information should be shown
   @JsonKey(defaultValue: true, name: "debug")
-  final bool? debug;
+  bool? debug;
 
   HConfig({required this.debug});
 
-  factory HConfig.fromJson(Map<String, dynamic> json) => _$HConfigFromJson(json);
+  factory HConfig.fromJson(Map<String, dynamic> json) =>
+      _$HConfigFromJson(json);
 
   Map<String, dynamic> toJson() => _$HConfigToJson(this);
 }

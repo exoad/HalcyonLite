@@ -1,7 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:halcyon/tailwind/player.dart';
 import 'package:flutter/material.dart';
-import 'package:halcyon/util/toggleable.dart';
+import 'package:halcyon/util/intfs.dart';
 
 /// Represents a standard
 const TDurationUnknown = Duration(
@@ -59,6 +59,8 @@ final TailwindModel tailwind = TailwindModel();
 class TailwindModel extends Tailwind
     with ChangeNotifier
     implements HToggleable {
+  TailwindModel() : super();
+
   /// Provides for accessing whether the current player is playing or not.
   ///
   /// Note [isStopped] is inversing the call of [isStarted]
@@ -73,11 +75,16 @@ class TailwindModel extends Tailwind
   }
 
   @override
+  void pause() {
+    super.pause();
+    notifyListeners();
+  }
+
+  @override
   void toggle() {
     if (isPlaying())
       pause();
     else
       play();
-    notifyListeners();
   }
 }

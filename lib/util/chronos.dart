@@ -1,4 +1,4 @@
-String monthName(int month) => switch (month) {
+String hMonthName(int month) => switch (month) {
       1 => "January",
       2 => "February",
       3 => "March",
@@ -13,3 +13,10 @@ String monthName(int month) => switch (month) {
       12 => "December",
       _ => "UnknowMonth"
     };
+
+String hFormatLogTimestamp() {
+  DateTime now = DateTime.now();
+  String padZeroes(dynamic r) => r.toString().padLeft(2, "0");
+
+  return "${hMonthName(now.month).substring(0, 3)} ${padZeroes(now.day)} ${now.year} | ${padZeroes(now.hour)}:${padZeroes(now.minute)}:${padZeroes(now.second)}";
+}

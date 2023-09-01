@@ -4,20 +4,15 @@ var _logContents = <String>[];
 
 /// [LogLevel] specifies how dangerous a log is and how far it should be prioritized to be shown to
 /// the user or the developer.
-enum LogLevel {
+enum HLogLevel {
   LOW("INFO"),
   MEDIUM("WARN"),
   HIGH("HIGH");
 
   final String str;
-  const LogLevel(this.str);
+  const HLogLevel(this.str);
 }
 
-String _dateFmt() {
-  DateTime now = DateTime.now();
-  return "${chronos.monthName(now.month)}/${now.day}/${now.year} | ${now.hour}:${now.minute}:${now.second}";
-}
-
-void log(LogLevel level, content) {
-  print("${_dateFmt()} | [${level.str}]\t>\t${content.toString()}");
+void hLog(HLogLevel level, content) {
+  print("${chronos.hFormatLogTimestamp()} | [${level.str}]\t>\t${content.toString()}");
 }
