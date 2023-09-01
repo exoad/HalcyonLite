@@ -16,7 +16,7 @@ enum LogLevel {
 
 String _dateFmt() {
   DateTime now = DateTime.now();
-  return "${chronos.monthName(now.month)}/${now.day}/${now.year} | {now.hour}:${now.minute}:${now.second}";
+  return "${chronos.monthName(now.month)}/${now.day}/${now.year} | ${now.hour}:${now.minute}:${now.second}";
 }
 
 void log(LogLevel level, content) {

@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:halcyon/tailwind/player.dart';
 import 'package:flutter/material.dart';
 
@@ -35,4 +36,19 @@ List<String> T_supportedEndings() {
 
 final TailwindModel tailwind = TailwindModel();
 
-class TailwindModel extends Tailwind with ChangeNotifier {}
+class TailwindModel extends Tailwind with ChangeNotifier {
+
+  /// Provides for accessing whether the current player is playing or not.
+  ///
+  /// Note [isStopped] is inversing the call of [isStarted]
+  bool isPlaying() => super.expose().state == PlayerState.playing;
+  bool isStopped() => !isPlaying();
+
+
+
+  @override
+  void play() {
+    super.play();
+    notifyListeners();
+  }
+}

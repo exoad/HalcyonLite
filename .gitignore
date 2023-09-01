@@ -31,3 +31,5 @@ app.*.map.json
 *.flac
 *.aac
 *.m4a
+.halcyon
+/halcyon

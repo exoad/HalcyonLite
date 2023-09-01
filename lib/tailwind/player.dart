@@ -1,7 +1,7 @@
 import 'dart:collection';
 
 import 'package:audioplayers/audioplayers.dart';
-import 'package:halcyon/logger.dart';
+import 'package:halcyon/util/logger.dart';
 import 'package:halcyon/tailwind/tailwind.dart';
 
 enum TPlayerState {
@@ -27,6 +27,13 @@ class Tailwind {
 
   /// Gets the current track at the current pointer
   Source currTrack() => queue.elementAt(_pointer);
+
+  /// Dangerous method!
+  ///
+  /// Returns the underlying WORKING tailwind player.
+  ///
+  /// This method for future implementations should not return all avaliable players.
+  AudioPlayer expose() => _player;
 
   /*---------------------------------------------------------------------------------- /
   / /// Instructs the audio player to start playing the select audio source right now. /

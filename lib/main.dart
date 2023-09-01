@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:halcyon/tailwind/tailwind.dart';
 import 'package:halcyon/util/io.dart';
+import 'package:halcyon/util/user.dart';
 import 'package:provider/provider.dart';
 
 /// This is the main entrypoint into the Halcyon program.
 void main() {
   hInitDir();
+  hEnsureMasterProperties();
 
   runApp(const MainApp());
 }
@@ -32,6 +34,6 @@ class HApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(value: tailwind, child: const Column(children: []));
+    return ChangeNotifierProvider.value(value: tailwind, child: const Column(children: [Text("Hi")]));
   }
 }
