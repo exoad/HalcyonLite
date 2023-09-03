@@ -15,7 +15,8 @@ class Tailwind implements HExposable<AudioPlayer> {
 
   /// Inits the items of the Tailwind Player.
   Tailwind() : _player = AudioPlayer() {
-    _player.eventStream.listen((event) => hLog(HLogLevel.LOW,
+    _player.eventStream.listen((event) => hLog(
+        HLogLevel.LOW,
         "Received an AUDIO_EVENT of [${event.eventType.name.toUpperCase()}] @ ${event.position}"));
   }
 
@@ -24,6 +25,8 @@ class Tailwind implements HExposable<AudioPlayer> {
       stop();
     _player.setSource(source);
   }
+
+  void setLooping(bool loop)=> _player.setReleaseMode( loop ? ReleaseMode.loop : ReleaseMode.release);
 
   @override
   AudioPlayer expose() => _player;

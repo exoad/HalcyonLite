@@ -5,4 +5,6 @@ void hDebugInitLoggingListeners() {
   tailwind.expose().eventStream.listen((event) => hLog(
       HLogLevel.MEDIUM,
       "TailwindEvent[${event.eventType}] | Dur: ${event.duration} | Pos: ${event.position}"));
+  tailwind.expose().onPlayerStateChanged.listen((event) =>
+      hLog(HLogLevel.MEDIUM, "TailwindEvent[$event]"));
 }
