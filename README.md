@@ -1,3 +1,3 @@
 # Halcyon
 
-Reimplementation of the Halcyon music player in Dart using Flutter.
+A smaller Halcyon player written in Flutter.

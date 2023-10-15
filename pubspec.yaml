@@ -1,5 +1,5 @@
-name: halcyon
-description: "A new Flutter project."
+name: halcyon_lite
+description: "A smaller compact version of the finalized Halcyon."
 publish_to: 'none'
 version: 0.1.0
 
@@ -24,5 +24,4 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/test.mp3
-    - assets/test-sound.mp3
+    - assets/

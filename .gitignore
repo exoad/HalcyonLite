@@ -33,3 +33,4 @@ app.*.map.json
 *.m4a
 .halcyon
 /halcyon
+assets/moosic
