@@ -8,6 +8,10 @@ Map<String, ({String path, AssetType type})> assetPaths = {
     path: "moosic/darby-relive.mp3",
     type: AssetType.audio
   ),
+  "rimworldOST": (
+    path: "moosic/rimworldost.mp3",
+    type: AssetType.audio
+  ),
   "defaultAlbumArt": (
     path: "assets/img/DefaultAA.png",
     type: AssetType.image

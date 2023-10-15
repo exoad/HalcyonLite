@@ -8,12 +8,15 @@ environment:
 
 dependencies:
   audioplayers: ^5.1.0
+  audiotags: ^1.3.0
+  discord_rpc: ^0.0.2
   file_picker: ^5.3.4
   flutter:
     sdk: flutter
   json_annotation: ^4.8.1
   json_serializable: ^6.7.1
   provider: ^6.0.5
+  window_manager: ^0.3.7
 
 dev_dependencies:
   flutter_test:
@@ -26,3 +29,4 @@ flutter:
   assets:
     - assets/img/DefaultAA.png
     - assets/moosic/darby-relive.mp3
+    - assets/moosic/rimworldost.mp3

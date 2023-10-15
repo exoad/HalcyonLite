@@ -8,14 +8,49 @@ Widget createSimpleButton(IconData icon, Function() onPressed,
   return Container(
     decoration: BoxDecoration(
         color: bg,
-        borderRadius: const BorderRadius.all(Radius.circular(8))),
+        borderRadius: const BorderRadius.all(
+            Radius.circular(HalcyonLLaf.arcRadius))),
     child: IconButton(
         highlightColor: transparentColor,
         splashColor: transparentColor,
         onPressed: onPressed,
-        iconSize: iconSize ?? 32,
-        icon: Icon(icon, color: fg)),
+        iconSize: iconSize ?? HalcyonLLaf.bigButtonIconSize,
+        icon: Icon(
+          icon,
+          color: fg,
+        )),
   );
+}
+
+Widget createSmallTag(
+    {IconData? icon,
+    String? text,
+    double gap = 2,
+    Color fg = PoprockLaF.bg,
+    Color bg = PoprockLaF.primary1,
+    TextStyle textStyle =
+        const TextStyle(fontSize: 9, fontWeight: FontWeight.w700)}) {
+  assert(icon != null || text != null,
+      "Either icon or text must be non-null in a small attribute tag (icon: $icon, text: $text)");
+  return Padding(
+      padding: const EdgeInsets.all(4),
+      child: Container(
+        decoration: BoxDecoration(
+            color: bg,
+            borderRadius: const BorderRadius.all(
+                Radius.circular(HalcyonLLaf.tagArcRadius))),
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: Row(
+            children: [
+              if (icon != null) Icon(icon, color: fg, size: 12),
+              SizedBox(width: gap),
+              if (text != null)
+                Text(text, style: textStyle.copyWith(color: fg))
+            ],
+          ),
+        ),
+      ));
 }
 
 extension HColor on Color {
