@@ -24,4 +24,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/
+    - assets/img/DefaultAA.png
+    - assets/moosic/darby-relive.mp3

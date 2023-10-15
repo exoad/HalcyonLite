@@ -1,20 +1,15 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 enum AssetType { image, audio, video, font, other }
 
-String _asset(String path) => "assets/$path";
-
 Map<String, ({String path, AssetType type})> assetPaths = {
   "darbyRelive": (
-    path: _asset("moosic/darby-relive.mp3"),
-    type: AssetType.audio
-  ),
-  "cloudSurfing": (
-    path: _asset("moosic/cloud-surfing.mp3"),
+    path: "moosic/darby-relive.mp3",
     type: AssetType.audio
   ),
   "defaultAlbumArt": (
-    path: _asset("icons/DefaultAlbumArt.png"),
+    path: "assets/img/DefaultAA.png",
     type: AssetType.image
   ),
 };
@@ -22,12 +17,15 @@ Map<String, ({String path, AssetType type})> assetPaths = {
 AssetsContract HassetContract = AssetsContract();
 
 class AssetsContract {
-  late final Map<String, dynamic> assets = {};
+  final Map<String, AssetImage> assetImages = {};
+  final Map<String, AssetSource> assetAudio = {};
 
   void load() {
     assetPaths.forEach((key, value) {
       if (value.type == AssetType.image)
-        assets[key] = AssetImage(value.path);
+        assetImages[key] = AssetImage(value.path);
+      else if (value.type == AssetType.audio)
+        assetAudio[key] = AssetSource(value.path);
     });
   }
 }
