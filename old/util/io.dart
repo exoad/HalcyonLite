@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:halcyon/halcyon/halcyon_defs.dart';
+import 'package:halcyon/halcyon/halcyon_defs.dart.txt';
 
 typedef HFileCreationConf = ({
   String content,
@@ -38,7 +38,7 @@ Future<File> hCreateFileIfNotExist(String fileDir) async {
 }
 
 /// Writes to a file and checks if the file exists.
-Future<File> hCreateFileIfNotExistAndWrite(
+Future<File> hCreateFileConfIfNotExistAndWrite(
     String fileDir, HFileCreationConf conf) async {
   File e = await hCreateFileIfNotExist(fileDir);
   return e.writeAsString(conf.content,

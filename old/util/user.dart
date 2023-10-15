@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:halcyon/constants.dart';
-import 'package:halcyon/halcyon/halcyon_defs.dart';
+import 'package:halcyon/halcyon/halcyon_defs.dart.txt';
 import 'package:halcyon/util/io.dart';
 import 'package:halcyon/util/logger.dart';
 
@@ -41,4 +41,6 @@ void hEnsureMasterProperties() {
   }
   hLog(HLogLevel.MEDIUM,
       "Loaded [HConfig] with [${AppConstants.hConf.toJson().length}] properties");
+  hLog(HLogLevel.LOW,
+      "[HConfig] properties: ${AppConstants.hConf.toJson().toString()}");
 }

@@ -9,7 +9,7 @@ enum TPlayerState {
   PB_KILL;
 }
 
-/// The **Tailwind** class provides the defaults for all audio interfacing. It represents the minimal barebones interface between [audioplayers] package and the Halcyon program.
+/// The **Tailwind** class provides the defaults for all audio interfacing. It represents the minimal barebones interface between [audioplayers] package and the Halcyon program.\
 class Tailwind implements HExposable<AudioPlayer> {
   final AudioPlayer _player;
 
@@ -25,8 +25,6 @@ class Tailwind implements HExposable<AudioPlayer> {
       stop();
     _player.setSource(source);
   }
-
-  void setLooping(bool loop)=> _player.setReleaseMode( loop ? ReleaseMode.loop : ReleaseMode.release);
 
   @override
   AudioPlayer expose() => _player;

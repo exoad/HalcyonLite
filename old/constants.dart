@@ -1,4 +1,4 @@
-import 'package:halcyon/halcyon/halcyon_defs.dart';
+import 'package:halcyon/halcyon/halcyon_defs.dart.txt';
 
 /// Holds all of the running constants within the program
 class AppConstants {

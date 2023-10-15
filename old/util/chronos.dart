@@ -13,10 +13,9 @@ String hMonthName(int month) => switch (month) {
       12 => "December",
       _ => "UnknowMonth"
     };
-
-String hFormatLogTimestamp() {
+String hFormatLogTimeStamp() {
   DateTime now = DateTime.now();
-  String padZeroes(dynamic r) => r.toString().padLeft(2, "0");
-
-  return "${hMonthName(now.month).substring(0, 3)} ${padZeroes(now.day)} ${now.year} | ${padZeroes(now.hour)}:${padZeroes(now.minute)}:${padZeroes(now.second)}";
+  String padZeroes(dynamic r) =>
+      r.toString().padLeft(2, "0");
+  return "${now.month.toString().substring(0, 3)} ${padZeroes(now.day)} ${now.year} | ${padZeroes(now.hour)}:${padZeroes(now.minute)}:${padZeroes(now.second)}";
 }

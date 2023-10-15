@@ -1,6 +1,7 @@
+import 'package:halcyon/halcyon/theme.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part "halcyon_defs.g.dart";
+part 'halcyon_defs.g.dart.txt';
 
 /// Represents the folder name of the root folder for storing states of the program.
 ///
@@ -20,6 +21,10 @@ class HConfig {
   /// If debug information should be shown
   @JsonKey(defaultValue: true, name: "debug")
   bool? debug;
+
+  /// Determines whether to apply a specific theme mode for themeing the app from [HGenericThemes]
+  @JsonKey(defaultValue: HGenericThemes.dark, name: "themeMode")
+  HGenericThemes? themeMode;
 
   HConfig({required this.debug});
 

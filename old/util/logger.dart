@@ -1,4 +1,5 @@
-import "package:halcyon/util/chronos.dart" as chronos;
+
+import 'package:halcyon/util/chronos.dart';
 
 var _logContents = <String>[];
 
@@ -14,5 +15,5 @@ enum HLogLevel {
 }
 
 void hLog(HLogLevel level, content) {
-  print("${chronos.hFormatLogTimestamp()} | [${level.str}]\t>\t${content.toString()}");
+  print("${hFormatLogTimeStamp()} | [${level.str}]\t>\t${content.toString()}");
 }
