@@ -41,8 +41,6 @@ void main() {
           text: sampleEvent.$1,
         ));
   });
-
-  MasterTags.addTag("HalcyonDiscordRPCLayer", const DiscordRPCTag());
 }
 
 class HalcyonApp extends StatelessWidget {
