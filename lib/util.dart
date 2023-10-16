@@ -22,15 +22,28 @@ Widget createSimpleButton(IconData icon, Function() onPressed,
   );
 }
 
-Widget createSmallTag({
-  IconData? icon,
-  String? text,
-  double gap = 2,
-  Color fg = PoprockLaF.bg,
-  Color bg = PoprockLaF.primary1,
-  TextStyle textStyle =
-      const TextStyle(fontSize: 10, fontWeight: FontWeight.w700),
-}) {
+String formatDuration(Duration duration) {
+  String hoursString =
+      (duration.inHours > 0) ? '${duration.inHours}:' : '';
+  String minutesString = (duration.inMinutes.remainder(60) < 10)
+      ? '0${duration.inMinutes.remainder(60)}'
+      : '${duration.inMinutes.remainder(60)}';
+  String secondsString = (duration.inSeconds.remainder(60) < 10)
+      ? '0${duration.inSeconds.remainder(60)}'
+      : '${duration.inSeconds.remainder(60)}';
+
+  return '$hoursString$minutesString:$secondsString';
+}
+
+Widget createSmallTag(
+    {IconData? icon,
+    String? text,
+    double gap = 2,
+    Color fg = PoprockLaF.bg,
+    Color bg = PoprockLaF.primary1,
+    TextStyle textStyle =
+        const TextStyle(fontSize: 10, fontWeight: FontWeight.w700),
+    double iconSize = 12}) {
   assert(icon != null || text != null,
       "Either icon or text must be non-null in a small attribute tag (icon: $icon, text: $text)");
   return Padding(
@@ -48,7 +61,7 @@ Widget createSmallTag({
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              if (icon != null) Icon(icon, color: fg, size: 12),
+              if (icon != null) Icon(icon, color: fg, size: iconSize),
               if (icon != null && text != null) SizedBox(width: gap),
               if (text != null)
                 Text(

@@ -110,31 +110,36 @@ class TopLayerHome extends StatelessWidget {
                         flex: 0,
                         child: Padding(
                           padding: const EdgeInsets.all(24.0),
-                          child: Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment.center,
+                          child: Column(
                             children: [
-                              createSimpleButton(
-                                Icons
-                                    .keyboard_double_arrow_left_rounded,
-                                () {},
-                                iconSize:
-                                    HalcyonLLaf.smallButtonIconSize,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                children: [
+                                  createSimpleButton(
+                                    Icons
+                                        .keyboard_double_arrow_left_rounded,
+                                    () {},
+                                    iconSize: HalcyonLLaf
+                                        .smallButtonIconSize,
+                                  ),
+                                  const SizedBox(
+                                      width: HalcyonLLaf
+                                          .playbackControlsButtonSpacing),
+                                  _HPlaybackButton(),
+                                  const SizedBox(
+                                      width: HalcyonLLaf
+                                          .playbackControlsButtonSpacing),
+                                  createSimpleButton(
+                                    Icons
+                                        .keyboard_double_arrow_right_rounded,
+                                    () {},
+                                    iconSize: HalcyonLLaf
+                                        .smallButtonIconSize,
+                                  ),
+                                ],
                               ),
-                              const SizedBox(
-                                  width: HalcyonLLaf
-                                      .playbackControlsButtonSpacing),
-                              _HPlaybackButton(),
-                              const SizedBox(
-                                  width: HalcyonLLaf
-                                      .playbackControlsButtonSpacing),
-                              createSimpleButton(
-                                Icons
-                                    .keyboard_double_arrow_right_rounded,
-                                () {},
-                                iconSize:
-                                    HalcyonLLaf.smallButtonIconSize,
-                              ),
+                              const MoosicProgress()
                             ],
                           ),
                         ),
@@ -173,23 +178,47 @@ class _MoosicTextInfoState extends State<MoosicTextInfo> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            mainPlayer.tag?.title ?? "Unknown",
-            style: const TextStyle(
-                fontSize: HalcyonLLaf.primaryMoosicInfoFontSize,
-                color: PoprockLaF.primary1,
-                fontWeight: FontWeight.w700,
-                overflow: TextOverflow.ellipsis),
+          Row(
+            children: [
+              GestureDetector(
+                  // todo: finish implementing this widget for an information dialog
+                  onTap: () async {
+                    await showDialog(
+                        context: context,
+                        builder: (context) {
+                          return TailwindAudioInfoDialog(
+                              audioTag: mainPlayer.tag!);
+                        });
+                  },
+                  child: createSmallTag(
+                      icon: Icons.info_outline_rounded,
+                      iconSize: 16)),
+              const SizedBox(width: 4),
+              Expanded(
+                child: Text(
+                  mainPlayer.tag?.title ?? "Unknown",
+                  style: const TextStyle(
+                      fontSize: HalcyonLLaf.primaryMoosicInfoFontSize,
+                      color: PoprockLaF.primary1,
+                      fontWeight: FontWeight.w700,
+                      overflow: TextOverflow.ellipsis),
+                ),
+              ),
+            ],
           ),
           const SizedBox(height: 16),
           Row(children: [
             createSmallTag(
                 text: mainPlayer.tag?.trackArtist ?? "Unknown",
-                bg: PoprockLaF.primary2),
+                bg: PoprockLaF.primary2,
+                textStyle: const TextStyle(
+                    fontSize: 12, fontWeight: FontWeight.w700)),
             if ((mainPlayer.tag?.album ?? "Unknown") != "Unknown")
               createSmallTag(
                   text: mainPlayer.tag?.album ?? "Unknown",
-                  bg: PoprockLaF.primary2),
+                  bg: PoprockLaF.primary2,
+                  textStyle: const TextStyle(
+                      fontSize: 12, fontWeight: FontWeight.w800)),
           ]),
           const SizedBox(height: 4),
           Row(children: [
@@ -206,10 +235,64 @@ class _MoosicTextInfoState extends State<MoosicTextInfo> {
                     .split(".")[0],
                 bg: PoprockLaF.primary3),
             createSmallTag(
-                text: mainPlayer.tag?.year.toString() ?? "Unknown",
-                bg: PoprockLaF.primary3)
+              text: mainPlayer.tag?.year.toString() ?? "Unknown",
+              bg: PoprockLaF.primary3,
+            )
           ])
         ]);
+  }
+}
+
+class MoosicProgress extends StatefulWidget {
+  const MoosicProgress({super.key});
+
+  @override
+  State<MoosicProgress> createState() => _ProgressBarState();
+}
+
+class _ProgressBarState extends State<MoosicProgress> {
+  double _sliderPercent = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    mainPlayer.player.onPositionChanged.listen((event) {
+      setState(() {
+        mainPlayer.player.getDuration().then((value) =>
+            _sliderPercent =
+                event.inMilliseconds / value!.inMilliseconds);
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+          createSmallTag( text:  ""),
+
+
+        Expanded(
+          child: Slider(
+              value: _sliderPercent,
+              onChanged: (percent) {
+                setState(() {
+                  _sliderPercent = percent;
+                  mainPlayer.player.getDuration().then((value) {
+                    mainPlayer.player
+                        .seek(Duration(
+                            milliseconds:
+                                (percent * value!.inMilliseconds)
+                                    .toInt()))
+                        .then((value) => print(
+                            "Progress Bar seeked to ${percent * 100}%"));
+                  });
+                });
+              }),
+        ),
+      ],
+    );
   }
 }
 

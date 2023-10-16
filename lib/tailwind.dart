@@ -67,3 +67,19 @@ class HAudioPlayer with ChangeNotifier {
     await player.pause();
   }
 }
+
+class TailwindAudioInfoDialog extends StatelessWidget {
+  final Tag audioTag;
+
+  const TailwindAudioInfoDialog({super.key, required this.audioTag});
+
+  @override
+  Widget build(BuildContext context) {
+    return const SizedBox(
+        child: Column(children: [
+      Text.rich(TextSpan(children: [
+        TextSpan(text: "Placeholder"),
+      ]))
+    ]));
+  }
+}

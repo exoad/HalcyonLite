@@ -21,25 +21,20 @@ void main() {
   runApp(const HalcyonApp());
   initDiscordRPC();
 
-  mainPlayer.setSource(HassetContract.assetAudio["darbyRelive"]!);
+  mainPlayer.setSource(HassetContract.assetAudio["rimworldOST"]!);
   mainPlayer.player.onPlayerStateChanged.listen((playerState) {
     (String, IconData) sampleEvent;
-    if (playerState == PlayerState.playing)
+    if (playerState == PlayerState.playing) {
       sampleEvent = ("Playing", Icons.play_arrow_rounded);
-    else if (playerState == PlayerState.paused)
-      sampleEvent = ("Paused", Icons.pause_rounded);
-    else if (playerState == PlayerState.stopped)
-      sampleEvent = ("Stopped", Icons.stop_rounded);
-    else if (playerState == PlayerState.completed)
-      sampleEvent = ("Completed", Icons.check_circle_rounded);
-    else
-      sampleEvent = ("Unknown", Icons.question_mark_rounded);
-    MasterTags.addTag(
-        "PlayerState",
-        createSmallTag(
-          icon: sampleEvent.$2,
-          text: sampleEvent.$1,
-        ));
+      MasterTags.addTag(
+          "PlayerState",
+          createSmallTag(
+            icon: sampleEvent.$2,
+            text: sampleEvent.$1,
+          ));
+    } else {
+      MasterTags.removeTag("PlayerState");
+    }
   });
 }
 
@@ -53,8 +48,19 @@ class HalcyonApp extends StatelessWidget {
       title: "Halcyon",
       theme: ThemeData(
           primaryColor: PoprockLaF.primary1,
+
           colorScheme:
-              ColorScheme.fromSwatch(backgroundColor: Colors.black)),
+              ColorScheme.fromSwatch(backgroundColor: Colors.black),
+          sliderTheme: SliderThemeData(
+              overlappingShapeStrokeColor: transparentColor,
+              overlayColor: transparentColor,
+              trackHeight:
+                  MediaQuery.of(context).devicePixelRatio * 4,
+              activeTrackColor: PoprockLaF.primary1,
+              inactiveTrackColor:
+                  PoprockLaF.primary1.withOpacity(0.4),
+              thumbColor: PoprockLaF.primary1,
+              disabledThumbColor: PoprockLaF.primary1)),
       home: const HalcyonHome(),
     );
   }
