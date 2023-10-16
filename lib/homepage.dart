@@ -49,7 +49,7 @@ class _BottomLayerHomeState extends State<BottomLayerHome> {
               ? Image.memory(
                   mainPlayer.tag!.pictures[0].bytes,
                   fit: BoxFit.cover,
-                  scale: 2.2,
+                  scale: MediaQuery.of(context).devicePixelRatio,
                 )
               : Image(
                   fit: BoxFit.cover,
@@ -182,22 +182,15 @@ class _MoosicTextInfoState extends State<MoosicTextInfo> {
                 overflow: TextOverflow.ellipsis),
           ),
           const SizedBox(height: 16),
-          Text.rich(
-              TextSpan(children: [
-                TextSpan(
-                  text: mainPlayer.tag?.trackArtist ?? "Unknown",
-                ),
-                const TextSpan(
-                  text: ", ",
-                ),
-                TextSpan(
+          Row(children: [
+            createSmallTag(
+                text: mainPlayer.tag?.trackArtist ?? "Unknown",
+                bg: PoprockLaF.primary2),
+            if ((mainPlayer.tag?.album ?? "Unknown") != "Unknown")
+              createSmallTag(
                   text: mainPlayer.tag?.album ?? "Unknown",
-                ),
-              ]),
-              style: const TextStyle(
-                  fontSize: HalcyonLLaf.secondaryMoosicInfoFontSize,
-                  color: PoprockLaF.primary2,
-                  fontWeight: FontWeight.w500)),
+                  bg: PoprockLaF.primary2),
+          ]),
           const SizedBox(height: 4),
           Row(children: [
             createSmallTag(
@@ -243,7 +236,7 @@ class _AlbumArtState extends State<AlbumArt> {
       child: Center(
         child: mainPlayer.tag != null
             ? Padding(
-                padding: const EdgeInsets.all(18.0),
+                padding: const EdgeInsets.all(24),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(
                       Radius.circular(HalcyonLLaf.arcRadius)),
