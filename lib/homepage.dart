@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:halcyon_lite/apps/apps.dart';
 import 'package:halcyon_lite/constants.dart';
@@ -12,7 +14,60 @@ class HalcyonHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.black,
-      body: TopLayerHome(),
+      body: Stack(children: [
+        BottomLayerHome(),
+        TopLayerHome(),
+      ]),
+    );
+  }
+}
+
+class BottomLayerHome extends StatefulWidget {
+  const BottomLayerHome({
+    super.key,
+  });
+
+  @override
+  State<BottomLayerHome> createState() => _BottomLayerHomeState();
+}
+
+class _BottomLayerHomeState extends State<BottomLayerHome> {
+  @override
+  void initState() {
+    super.initState();
+    mainPlayer.tagStream.listen((_) => setState(() {}));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.centerLeft,
+      children: [
+        ImageFiltered(
+          imageFilter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+          child: mainPlayer.tag != null
+              ? Image.memory(
+                  mainPlayer.tag!.pictures[0].bytes,
+                  fit: BoxFit.cover,
+                  scale: 2.2,
+                )
+              : Image(
+                  fit: BoxFit.cover,
+                  image:
+                      HassetContract.assetImages["defaultAlbumArt"]!,
+                ),
+        ),
+        Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [Colors.transparent, Colors.black],
+              stops: [0.2, 0.75],
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -24,69 +79,74 @@ class TopLayerHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flex(
-      direction: Axis.vertical,
-      children: [
-        Flexible(
-            flex: 0,
-            child: MasterTags(key: MasterTags.masterTagsKey)),
-        Flexible(
-          flex: 1,
-          child: Center(
-            child: Flex(direction: Axis.horizontal, children: [
-              const Flexible(child: AlbumArt()),
-              Flexible(
-                flex: 1,
-                child: Flex(
-                  direction: Axis.vertical,
-                  children: [
-                    const Flexible(
-                      flex: 1,
-                      fit: FlexFit.tight,
-                      child: Center(
-                        child: MoosicTextInfo(),
-                      ),
-                    ),
-                    Flexible(
-                      fit: FlexFit.tight,
-                      flex: 0,
-                      child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            createSimpleButton(
-                              Icons
-                                  .keyboard_double_arrow_left_rounded,
-                              () {},
-                              iconSize:
-                                  HalcyonLLaf.smallButtonIconSize,
-                            ),
-                            const SizedBox(
-                                width: HalcyonLLaf
-                                    .playbackControlsButtonSpacing),
-                            _HPlaybackButton(),
-                            const SizedBox(
-                                width: HalcyonLLaf
-                                    .playbackControlsButtonSpacing),
-                            createSimpleButton(
-                              Icons
-                                  .keyboard_double_arrow_right_rounded,
-                              () {},
-                              iconSize:
-                                  HalcyonLLaf.smallButtonIconSize,
-                            ),
-                          ],
+    return Container(
+      color: const Color.fromARGB(100, 0, 0, 0),
+      child: Flex(
+        direction: Axis.vertical,
+        children: [
+          Flexible(
+              flex: 0,
+              child: MasterTags(key: MasterTags.masterTagsKey)),
+          Flexible(
+            flex: 1,
+            child: Center(
+              child: Flex(direction: Axis.horizontal, children: [
+                const Flexible(child: AlbumArt()),
+                const SizedBox(width: 10),
+                Flexible(
+                  flex: 1,
+                  child: Flex(
+                    direction: Axis.vertical,
+                    children: [
+                      const Flexible(
+                        flex: 1,
+                        fit: FlexFit.tight,
+                        child: Center(
+                          child: MoosicTextInfo(),
                         ),
                       ),
-                    ),
-                  ],
+                      Flexible(
+                        fit: FlexFit.tight,
+                        flex: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Row(
+                            mainAxisAlignment:
+                                MainAxisAlignment.center,
+                            children: [
+                              createSimpleButton(
+                                Icons
+                                    .keyboard_double_arrow_left_rounded,
+                                () {},
+                                iconSize:
+                                    HalcyonLLaf.smallButtonIconSize,
+                              ),
+                              const SizedBox(
+                                  width: HalcyonLLaf
+                                      .playbackControlsButtonSpacing),
+                              _HPlaybackButton(),
+                              const SizedBox(
+                                  width: HalcyonLLaf
+                                      .playbackControlsButtonSpacing),
+                              createSimpleButton(
+                                Icons
+                                    .keyboard_double_arrow_right_rounded,
+                                () {},
+                                iconSize:
+                                    HalcyonLLaf.smallButtonIconSize,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ]),
+              ]),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -151,22 +211,53 @@ class _MoosicTextInfoState extends State<MoosicTextInfo> {
                 text: Duration(seconds: mainPlayer.tag?.duration ?? 0)
                     .toString()
                     .split(".")[0],
+                bg: PoprockLaF.primary3),
+            createSmallTag(
+                text: mainPlayer.tag?.year.toString() ?? "Unknown",
                 bg: PoprockLaF.primary3)
           ])
         ]);
   }
 }
 
-class AlbumArt extends StatelessWidget {
+class AlbumArt extends StatefulWidget {
   const AlbumArt({
     super.key,
   });
 
   @override
+  State<AlbumArt> createState() => _AlbumArtState();
+}
+
+class _AlbumArtState extends State<AlbumArt> {
+  @override
+  void initState() {
+    super.initState();
+    mainPlayer.tagStream.listen((_) => setState(() {}));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Image(
-          image: HassetContract.assetImages["defaultAlbumArt"]!),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Center(
+        child: mainPlayer.tag != null
+            ? Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(
+                      Radius.circular(HalcyonLLaf.arcRadius)),
+                  child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Image.memory(
+                          mainPlayer.tag!.pictures[0].bytes,
+                          fit: BoxFit.cover)),
+                ),
+              )
+            : Image(
+                image:
+                    HassetContract.assetImages["defaultAlbumArt"]!),
+      ),
     );
   }
 }

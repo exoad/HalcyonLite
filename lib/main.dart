@@ -21,7 +21,7 @@ void main() {
   runApp(const HalcyonApp());
   initDiscordRPC();
 
-  mainPlayer.setSource(HassetContract.assetAudio["rimworldOST"]!);
+  mainPlayer.setSource(HassetContract.assetAudio["darbyRelive"]!);
   mainPlayer.player.onPlayerStateChanged.listen((playerState) {
     (String, IconData) sampleEvent;
     if (playerState == PlayerState.playing)
