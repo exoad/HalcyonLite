@@ -109,11 +109,51 @@ class _MoosicTextInfoState extends State<MoosicTextInfo> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      mainPlayer.tag?.title ?? "No Song Playing",
-      style: const TextStyle(color: PoprockLaF.primary1),
-      textAlign: TextAlign.center,
-    );
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            mainPlayer.tag?.title ?? "Unknown",
+            style: const TextStyle(
+                fontSize: HalcyonLLaf.primaryMoosicInfoFontSize,
+                color: PoprockLaF.primary1,
+                fontWeight: FontWeight.w700,
+                overflow: TextOverflow.ellipsis),
+          ),
+          const SizedBox(height: 16),
+          Text.rich(
+              TextSpan(children: [
+                TextSpan(
+                  text: mainPlayer.tag?.trackArtist ?? "Unknown",
+                ),
+                const TextSpan(
+                  text: ", ",
+                ),
+                TextSpan(
+                  text: mainPlayer.tag?.album ?? "Unknown",
+                ),
+              ]),
+              style: const TextStyle(
+                  fontSize: HalcyonLLaf.secondaryMoosicInfoFontSize,
+                  color: PoprockLaF.primary2,
+                  fontWeight: FontWeight.w500)),
+          const SizedBox(height: 4),
+          Row(children: [
+            createSmallTag(
+                text: mainPlayer
+                    .getSource()
+                    .split(".")[
+                        mainPlayer.getSource().split(".").length - 1]
+                    .toUpperCase(),
+                bg: PoprockLaF.primary3),
+            createSmallTag(
+                text: Duration(seconds: mainPlayer.tag?.duration ?? 0)
+                    .toString()
+                    .split(".")[0],
+                bg: PoprockLaF.primary3)
+          ])
+        ]);
   }
 }
 

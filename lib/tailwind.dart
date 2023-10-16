@@ -19,6 +19,18 @@ class HAudioPlayer with ChangeNotifier {
     _initializeListeners();
   }
 
+  String getSource() {
+    if (player.source.runtimeType == AssetSource) {
+      return "assets/${(player.source as AssetSource).path}";
+    } else if (player.source.runtimeType == UrlSource) {
+      return (player.source as UrlSource).url;
+    } else if (player.source.runtimeType == DeviceFileSource) {
+      return (player.source as DeviceFileSource).path;
+    } else {
+      return "???";
+    }
+  }
+
   void _initializeListeners() {
     addListener(() async {
       if (player.source.runtimeType == AssetSource) {

@@ -15,4 +15,6 @@ class HalcyonLLaf {
   static const double arcRadius = 8;
   static const double tagArcRadius = 3;
   static const double playbackControlsButtonSpacing = 25;
+  static const double secondaryMoosicInfoFontSize = 14;
+  static const double primaryMoosicInfoFontSize = 18;
 }

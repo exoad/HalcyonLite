@@ -22,35 +22,46 @@ Widget createSimpleButton(IconData icon, Function() onPressed,
   );
 }
 
-Widget createSmallTag(
-    {IconData? icon,
-    String? text,
-    double gap = 2,
-    Color fg = PoprockLaF.bg,
-    Color bg = PoprockLaF.primary1,
-    TextStyle textStyle =
-        const TextStyle(fontSize: 9, fontWeight: FontWeight.w700)}) {
+Widget createSmallTag({
+  IconData? icon,
+  String? text,
+  double gap = 2,
+  Color fg = PoprockLaF.bg,
+  Color bg = PoprockLaF.primary1,
+  TextStyle textStyle =
+      const TextStyle(fontSize: 10, fontWeight: FontWeight.w700),
+}) {
   assert(icon != null || text != null,
       "Either icon or text must be non-null in a small attribute tag (icon: $icon, text: $text)");
   return Padding(
-      padding: const EdgeInsets.all(4),
-      child: Container(
-        decoration: BoxDecoration(
-            color: bg,
-            borderRadius: const BorderRadius.all(
-                Radius.circular(HalcyonLLaf.tagArcRadius))),
-        child: Padding(
-          padding: const EdgeInsets.all(2.0),
+    padding: const EdgeInsets.all(4),
+    child: Container(
+      decoration: BoxDecoration(
+        color: bg,
+        borderRadius: const BorderRadius.all(
+          Radius.circular(HalcyonLLaf.tagArcRadius),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Center(
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (icon != null) Icon(icon, color: fg, size: 12),
-              SizedBox(width: gap),
+              if (icon != null && text != null) SizedBox(width: gap),
               if (text != null)
-                Text(text, style: textStyle.copyWith(color: fg))
+                Text(
+                  text,
+                  style: textStyle.copyWith(color: fg),
+                  textAlign: TextAlign.center,
+                ),
             ],
           ),
         ),
-      ));
+      ),
+    ),
+  );
 }
 
 extension HColor on Color {
