@@ -33,16 +33,16 @@ static void my_application_activate(GApplication* application) {
   if (use_header_bar) {
     GtkHeaderBar* header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
     gtk_widget_show(GTK_WIDGET(header_bar));
-    gtk_header_bar_set_title(header_bar, Halcyon::LINUX_WINDOW_TITLE);
+    gtk_header_bar_set_title(header_bar, HalcyonLite::LINUX_WINDOW_TITLE);
     gtk_header_bar_set_show_close_button(header_bar, TRUE);
     gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
-    gtk_window_set_icon_from_file(window, Halcyon::LINUX_WINDOW_ICON512, NULL);
-    gtk_window_set_icon_name(window, Halcyon::LINUX_WINDOW_ICON512);
+    gtk_window_set_icon_from_file(window, HalcyonLite::LINUX_WINDOW_ICON512, NULL);
+    gtk_window_set_icon_name(window, HalcyonLite::LINUX_WINDOW_ICON512);
   } else {
-    gtk_window_set_title(window, Halcyon::LINUX_WINDOW_TITLE);
+    gtk_window_set_title(window, HalcyonLite::LINUX_WINDOW_TITLE);
   }
-  gtk_window_set_default_size(window, Halcyon::WINDOW_WIDTH,
-                              Halcyon::WINDOW_HEIGHT);
+  gtk_window_set_default_size(window, HalcyonLite::WINDOW_WIDTH,
+                              HalcyonLite::WINDOW_HEIGHT);
   gtk_widget_show(GTK_WIDGET(window));
   gtk_window_activate_focus(window);
 

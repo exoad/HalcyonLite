@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:halcyon_lite/apps/discord.dart';
 import 'package:halcyon_lite/constants.dart';
 import 'package:halcyon_lite/homepage.dart';
 import 'package:halcyon_lite/laf.dart';
@@ -18,11 +19,9 @@ void main() {
   });
   HassetContract.load();
   runApp(const HalcyonApp());
+  initDiscordRPC();
+
   mainPlayer.setSource(HassetContract.assetAudio["rimworldOST"]!);
-  MasterTags.addTag(
-      "PlayerState",
-      createSmallTag(
-          icon: Icons.question_mark_rounded, text: "Warming up..."));
   mainPlayer.player.onPlayerStateChanged.listen((playerState) {
     (String, IconData) sampleEvent;
     if (playerState == PlayerState.playing)
@@ -35,7 +34,6 @@ void main() {
       sampleEvent = ("Completed", Icons.check_circle_rounded);
     else
       sampleEvent = ("Unknown", Icons.question_mark_rounded);
-
     MasterTags.addTag(
         "PlayerState",
         createSmallTag(
@@ -43,6 +41,8 @@ void main() {
           text: sampleEvent.$1,
         ));
   });
+
+  MasterTags.addTag("HalcyonDiscordRPCLayer", const DiscordRPCTag());
 }
 
 class HalcyonApp extends StatelessWidget {

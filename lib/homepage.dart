@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:halcyon_lite/apps/apps.dart';
 import 'package:halcyon_lite/constants.dart';
 import 'package:halcyon_lite/laf.dart';
 import 'package:halcyon_lite/tailwind.dart';
@@ -144,18 +145,31 @@ class MasterTags extends StatefulWidget {
 
   static void removeTag(String name) =>
       masterTagsKey.currentState?.removeTag(name);
+
+  static void refresh() => masterTagsKey.currentState?.refresh();
 }
 
 class MasterTagsState extends State<MasterTags> {
   final Map<String, Widget> _tags = <String, Widget>{};
+
+  @override
+  void initState() {
+    super.initState();
+    appsLoad.forEach((key, value) {
+      addTag(key, value);
+    });
+  }
 
   void addTag(String name, Widget tag) =>
       setState(() => _tags[name] = tag);
 
   void removeTag(String name) => setState(() => _tags.remove(name));
 
+  void refresh() => setState(() {});
+
   @override
   Widget build(BuildContext context) {
+    print(_tags.keys.toList());
     return SizedBox(
       height: 24,
       child: Row(
@@ -182,7 +196,6 @@ class _HPlaybackButtonState extends State<_HPlaybackButton> {
         mainPlayer.pause();
       }
     });
-
   }
 
   @override

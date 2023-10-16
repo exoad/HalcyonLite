@@ -11,7 +11,7 @@ HAudioPlayer mainPlayer = HAudioPlayer();
 class HAudioPlayer with ChangeNotifier {
   final AudioPlayer player = AudioPlayer();
   StreamController<Tag> _tagStreamController =
-      StreamController<Tag>();
+      StreamController<Tag>.broadcast();
   Stream<Tag> get tagStream => _tagStreamController.stream;
   Tag? tag;
 

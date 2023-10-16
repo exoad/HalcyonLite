@@ -22,8 +22,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
 
   FlutterWindow window(project);
   Win32Window::Point origin(10, 10);
-  Win32Window::Size size(Halcyon::WINDOW_WIDTH, Halcyon::WINDOW_HEIGHT);
-  if (!window.Create(Halcyon::WIN32_WINDOW_TITLE, origin, size)) {
+  Win32Window::Size size(HalcyonLite::WINDOW_WIDTH, HalcyonLite::WINDOW_HEIGHT);
+  if (!window.Create(HalcyonLite::WIN32_WINDOW_TITLE, origin, size)) {
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);
