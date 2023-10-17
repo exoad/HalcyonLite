@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:halcyon_lite/apps/apps.dart';
 import 'package:halcyon_lite/constants.dart';
@@ -91,7 +92,41 @@ class TopLayerHome extends StatelessWidget {
             flex: 1,
             child: Center(
               child: Flex(direction: Axis.horizontal, children: [
-                const Flexible(child: AlbumArt()),
+                Flexible(
+                    child: GestureDetector(
+                        onTap: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return HDialog(
+                                    title: "Album Art",
+                                    content: Image.memory(mainPlayer
+                                        .tag!.pictures[0].bytes),
+                                    actions: [
+                                      TextButton(
+                                          style: const ButtonStyle(
+                                              overlayColor:
+                                                  MaterialStatePropertyAll(
+                                                      transparentColor),
+                                              shadowColor:
+                                                  MaterialStatePropertyAll(
+                                                      transparentColor),
+                                              backgroundColor:
+                                                  MaterialStatePropertyAll(
+                                                      PoprockLaF
+                                                          .primary3),
+                                              foregroundColor:
+                                                  MaterialStatePropertyAll(
+                                                      PoprockLaF.bg)),
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop();
+                                          },
+                                          child: const Text("Close"))
+                                    ]);
+                              });
+                        },
+                        child: const AlbumArt())),
                 const SizedBox(width: 10),
                 Flexible(
                   flex: 1,
@@ -252,15 +287,20 @@ class MoosicProgress extends StatefulWidget {
 
 class _ProgressBarState extends State<MoosicProgress> {
   double _sliderPercent = 0.0;
+  Duration currentPosition = Duration.zero;
+  Duration duration = Duration.zero;
 
   @override
   void initState() {
     super.initState();
     mainPlayer.player.onPositionChanged.listen((event) {
       setState(() {
-        mainPlayer.player.getDuration().then((value) =>
-            _sliderPercent =
-                event.inMilliseconds / value!.inMilliseconds);
+        mainPlayer.player.getDuration().then((value) {
+          _sliderPercent =
+              event.inMilliseconds / value!.inMilliseconds;
+          currentPosition = event;
+          duration = value;
+        });
       });
     });
   }
@@ -270,9 +310,7 @@ class _ProgressBarState extends State<MoosicProgress> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-          createSmallTag( text:  ""),
-
-
+        createSmallTag(text: formatDuration(currentPosition)),
         Expanded(
           child: Slider(
               value: _sliderPercent,
@@ -280,17 +318,15 @@ class _ProgressBarState extends State<MoosicProgress> {
                 setState(() {
                   _sliderPercent = percent;
                   mainPlayer.player.getDuration().then((value) {
-                    mainPlayer.player
-                        .seek(Duration(
-                            milliseconds:
-                                (percent * value!.inMilliseconds)
-                                    .toInt()))
-                        .then((value) => print(
-                            "Progress Bar seeked to ${percent * 100}%"));
+                    mainPlayer.player.seek(Duration(
+                        milliseconds:
+                            (percent * value!.inMilliseconds)
+                                .toInt()));
                   });
                 });
               }),
         ),
+        createSmallTag(text: formatDuration(duration))
       ],
     );
   }
@@ -393,6 +429,16 @@ class _HPlaybackButton extends StatefulWidget {
 
 class _HPlaybackButtonState extends State<_HPlaybackButton> {
   bool isPlaying = false;
+
+  @override
+  void initState() {
+    super.initState();
+    mainPlayer.player.onPlayerStateChanged.listen((playerState) {
+      setState(() {
+        isPlaying = playerState == PlayerState.playing;
+      });
+    });
+  }
 
   void _togglePlay() {
     setState(() {

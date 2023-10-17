@@ -48,7 +48,20 @@ class HalcyonApp extends StatelessWidget {
       title: "Halcyon",
       theme: ThemeData(
           primaryColor: PoprockLaF.primary1,
-
+          dialogTheme: const DialogTheme(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                    Radius.circular(HalcyonLLaf.arcRadius))),
+            backgroundColor: PoprockLaF.bg,
+            titleTextStyle: TextStyle(
+                color: PoprockLaF.primary3,
+                fontSize: 18,
+                fontWeight: FontWeight.w700),
+            contentTextStyle: TextStyle(
+                color: PoprockLaF.primary3,
+                fontSize: 14,
+                fontWeight: FontWeight.w400),
+          ),
           colorScheme:
               ColorScheme.fromSwatch(backgroundColor: Colors.black),
           sliderTheme: SliderThemeData(

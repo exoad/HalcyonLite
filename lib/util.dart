@@ -77,6 +77,30 @@ Widget createSmallTag(
   );
 }
 
+class HDialog extends StatelessWidget {
+  const HDialog({
+    Key? key,
+    required this.title,
+    required this.content,
+    this.actions,
+    this.titleStyle,
+  }) : super(key: key);
+
+  final String title;
+  final Widget content;
+  final List<Widget>? actions;
+  final TextStyle? titleStyle;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(title, style: titleStyle),
+      content: content,
+      actions: actions,
+    );
+  }
+}
+
 extension HColor on Color {
   Color darken(double percentage) {
     assert(percentage >= 0 && percentage <= 1,
