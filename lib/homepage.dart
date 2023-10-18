@@ -174,7 +174,8 @@ class TopLayerHome extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              const MoosicProgress()
+                              const MoosicProgress(),
+                              _MoosicProgressControllersState()
                             ],
                           ),
                         ),
@@ -278,6 +279,52 @@ class _MoosicTextInfoState extends State<MoosicTextInfo> {
   }
 }
 
+class _MoosicProgressControllersState extends StatelessWidget {
+  static Widget _createControllerButton(
+      {required IconData icon,
+      Color bg = PoprockLaF.primary3,
+      required void Function() onPressed}) {
+    return IconButton(
+        onPressed: onPressed, icon: Icon(icon, color: bg, size: 24));
+  }
+
+  static Future<int> _calculateSeekTo(bool subtract) async {
+    int total = (await mainPlayer.player.getDuration())!.inSeconds;
+    int posRn =
+        (await mainPlayer.player.getCurrentPosition())!.inSeconds;
+    int result = subtract
+        ? posRn - audioSeekAmountAutoSeconds
+        : posRn + audioSeekAmountAutoSeconds;
+    return clampFx(value: result, lower: 0, upper: total) as int;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _createControllerButton(
+              icon: Icons.chevron_left_rounded,
+              onPressed: () async {
+                mainPlayer.player.seek(
+                    Duration(seconds: await _calculateSeekTo(true)));
+              }),
+          _createControllerButton(
+              icon: Icons.square_rounded,
+              onPressed: () {
+                mainPlayer.player.seek(Duration.zero);
+                mainPlayer.player.pause();
+              }),
+          _createControllerButton(
+              icon: Icons.chevron_right_rounded,
+              onPressed: () async {
+                mainPlayer.player.seek(
+                    Duration(seconds: await _calculateSeekTo(false)));
+              }),
+        ]);
+  }
+}
+
 class MoosicProgress extends StatefulWidget {
   const MoosicProgress({super.key});
 
@@ -310,7 +357,9 @@ class _ProgressBarState extends State<MoosicProgress> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        createSmallTag(text: formatDuration(currentPosition)),
+        createSmallTag(
+            text: formatDuration(currentPosition),
+            bg: PoprockLaF.primary2),
         Expanded(
           child: Slider(
               value: _sliderPercent,
@@ -326,7 +375,8 @@ class _ProgressBarState extends State<MoosicProgress> {
                 });
               }),
         ),
-        createSmallTag(text: formatDuration(duration))
+        createSmallTag(
+            text: formatDuration(duration), bg: PoprockLaF.primary2)
       ],
     );
   }
@@ -389,11 +439,12 @@ class MasterTags extends StatefulWidget {
   static void removeTag(String name) =>
       masterTagsKey.currentState?.removeTag(name);
 
-  static void refresh() => masterTagsKey.currentState?.refresh();
+  static MasterTagsState? getCurrState() =>
+      masterTagsKey.currentState;
 }
 
 class MasterTagsState extends State<MasterTags> {
-  final Map<String, Widget> _tags = <String, Widget>{};
+  final Map<String, Widget> tags = <String, Widget>{};
 
   @override
   void initState() {
@@ -403,20 +454,20 @@ class MasterTagsState extends State<MasterTags> {
     });
   }
 
-  void addTag(String name, Widget tag) =>
-      setState(() => _tags[name] = tag);
+  void addTag(String name, Widget tag) {
+    setState(() => tags[name] = tag);
+  }
 
-  void removeTag(String name) => setState(() => _tags.remove(name));
-
-  void refresh() => setState(() {});
+  void removeTag(String name) {
+    setState(() => tags.remove(name));
+  }
 
   @override
   Widget build(BuildContext context) {
-    print(_tags.keys.toList());
     return SizedBox(
       height: 24,
       child: Row(
-        children: _tags.values.toList(),
+        children: tags.values.toList(),
       ),
     );
   }

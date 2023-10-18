@@ -1,18 +1,16 @@
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:halcyon_lite/apps/discord.dart';
 import 'package:halcyon_lite/constants.dart';
 import 'package:halcyon_lite/homepage.dart';
 import 'package:halcyon_lite/laf.dart';
 import 'package:halcyon_lite/tailwind.dart';
-import 'package:halcyon_lite/util.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   windowManager.ensureInitialized();
   windowManager.waitUntilReadyToShow(
-      const WindowOptions(size: Size(600, 300), center: true),
+      const WindowOptions(size: Size(800, 480), center: true),
       () async {
     await windowManager.show();
     await windowManager.focus();
@@ -22,20 +20,6 @@ void main() {
   initDiscordRPC();
 
   mainPlayer.setSource(HassetContract.assetAudio["rimworldOST"]!);
-  mainPlayer.player.onPlayerStateChanged.listen((playerState) {
-    (String, IconData) sampleEvent;
-    if (playerState == PlayerState.playing) {
-      sampleEvent = ("Playing", Icons.play_arrow_rounded);
-      MasterTags.addTag(
-          "PlayerState",
-          createSmallTag(
-            icon: sampleEvent.$2,
-            text: sampleEvent.$1,
-          ));
-    } else {
-      MasterTags.removeTag("PlayerState");
-    }
-  });
 }
 
 class HalcyonApp extends StatelessWidget {
@@ -69,11 +53,11 @@ class HalcyonApp extends StatelessWidget {
               overlayColor: transparentColor,
               trackHeight:
                   MediaQuery.of(context).devicePixelRatio * 4,
-              activeTrackColor: PoprockLaF.primary1,
+              activeTrackColor: PoprockLaF.primary2,
               inactiveTrackColor:
-                  PoprockLaF.primary1.withOpacity(0.4),
-              thumbColor: PoprockLaF.primary1,
-              disabledThumbColor: PoprockLaF.primary1)),
+                  PoprockLaF.primary2.withOpacity(0.4),
+              thumbColor: PoprockLaF.primary2,
+              disabledThumbColor: PoprockLaF.primary2)),
       home: const HalcyonHome(),
     );
   }

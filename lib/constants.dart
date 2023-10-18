@@ -1,6 +1,22 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
+
+num clampFx(
+        {required num value,
+        required num lower,
+        required num upper}) =>
+    value < lower
+        ? lower
+        : value > upper
+            ? upper
+            : value;
+
+
+const bool useDebugging = true;
+
+const int audioSeekAmountAutoSeconds = 5;
+
 enum AssetType { image, audio, video, font, other }
 
 Map<String, ({String path, AssetType type})> assetPaths = {
