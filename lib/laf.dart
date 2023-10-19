@@ -10,11 +10,13 @@ class PoprockLaF {
 }
 
 class HalcyonLLaf {
+  static const FontWeight displayTrackInformationTagHeaderFontWeight =
+      FontWeight.w700;
   static const double bigButtonIconSize = 32;
   static const double smallButtonIconSize = 24;
   static const double arcRadius = 8;
   static const double tagArcRadius = 3;
-  static const double playbackControlsButtonSpacing = 25;
+  static const double playbackControlsButtonSpacing = 15;
   static const double secondaryMoosicInfoFontSize = 14;
   static const double primaryMoosicInfoFontSize = 20;
   static const bool useSlidingPrimaryTitleText =

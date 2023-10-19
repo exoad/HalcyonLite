@@ -1,6 +1,9 @@
 import 'dart:ui';
 
 import 'package:audioplayers/audioplayers.dart';
+/*------------------------------------------ /
+/ import 'package:audiotags/audiotags.dart'; /
+/-------------------------------------------*/
 import 'package:flutter/material.dart';
 import 'package:halcyon_lite/apps/apps.dart';
 import 'package:halcyon_lite/constants.dart';
@@ -94,8 +97,8 @@ class TopLayerHome extends StatelessWidget {
               child: Flex(direction: Axis.horizontal, children: [
                 Flexible(
                     child: GestureDetector(
-                        onTap: () {
-                          showDialog(
+                        onTap: () async {
+                          await showDialog(
                               context: context,
                               builder: (context) {
                                 return HDialog(
@@ -151,6 +154,22 @@ class TopLayerHome extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.center,
                                 children: [
+                                  HToggleBtn(
+                                      toggleOffLook: (
+                                        bg: transparentColor,
+                                        fg: PoprockLaF.primary1
+                                      ),
+                                      toggleOnLook: (
+                                        bg: PoprockLaF.primary1,
+                                        fg: Colors.black
+                                      ),
+                                      icon: Icons.shuffle_rounded,
+                                      iconSize: 22,
+                                      onTapListener: (e) {},
+                                      padding: 5),
+                                  const SizedBox(
+                                      width: HalcyonLLaf
+                                          .playbackControlsButtonSpacing),
                                   createSimpleButton(
                                     Icons
                                         .keyboard_double_arrow_left_rounded,
@@ -172,6 +191,22 @@ class TopLayerHome extends StatelessWidget {
                                     iconSize: HalcyonLLaf
                                         .smallButtonIconSize,
                                   ),
+                                  const SizedBox(
+                                      width: HalcyonLLaf
+                                          .playbackControlsButtonSpacing),
+                                  HToggleBtn(
+                                      toggleOffLook: (
+                                        bg: transparentColor,
+                                        fg: PoprockLaF.primary1
+                                      ),
+                                      toggleOnLook: (
+                                        bg: PoprockLaF.primary1,
+                                        fg: Colors.black
+                                      ),
+                                      icon: Icons.loop_rounded,
+                                      iconSize: 22,
+                                      onTapListener: (e) {},
+                                      padding: 8),
                                 ],
                               ),
                               const MoosicProgress(),
@@ -219,12 +254,41 @@ class _MoosicTextInfoState extends State<MoosicTextInfo> {
               GestureDetector(
                   // todo: finish implementing this widget for an information dialog
                   onTap: () async {
-                    await showDialog(
-                        context: context,
-                        builder: (context) {
-                          return TailwindAudioInfoDialog(
-                              audioTag: mainPlayer.tag!);
-                        });
+                    /*---------------------------------------------------------------------------- /
+                    / await showDialog(                                                            /
+                    /     context: context,                                                        /
+                    /     builder: (context) {                                                     /
+                    /       Tag tag = mainPlayer.tag!;                                             /
+                    /       return HDialog(                                                        /
+                    /           title: "",                                                         /
+                    /           content:                                                           /
+                    /               CustomScrollView(slivers: <Widget>[                            /
+                    /             SliverList(delegate:                                             /
+                    /                 SliverChildBuilderDelegate(                                  /
+                    /                     (context, index) {                                       /
+                    /               return Text.rich(                                              /
+                    /                 TextSpan(children: [                                         /
+                    /                   const TextSpan(                                            /
+                    /                       text: "Title: ",                                       /
+                    /                       style: TextStyle(                                      /
+                    /                           fontWeight: HalcyonLLaf                            /
+                    /                               .displayTrackInformationTagHeaderFontWeight)), /
+                    /                   TextSpan(                                                  /
+                    /                       text: "${tag.title}\n"),                               /
+                    /                   const TextSpan(                                            /
+                    /                       text: "Track Artist: ",                                /
+                    /                       style: TextStyle(                                      /
+                    /                           fontWeight: HalcyonLLaf                            /
+                    /                               .displayTrackInformationTagHeaderFontWeight)), /
+                    /                                                                              /
+                    /                 ]),                                                          /
+                    /                 style: const TextStyle(                                      /
+                    /                     color: PoprockLaF.primary1),                             /
+                    /               );                                                             /
+                    /             }))                                                              /
+                    /           ]));                                                               /
+                    /     });                                                                      /
+                    /-----------------------------------------------------------------------------*/
                   },
                   child: createSmallTag(
                       icon: Icons.info_outline_rounded,

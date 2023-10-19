@@ -77,6 +77,55 @@ Widget createSmallTag(
   );
 }
 
+typedef EntireColorBundle = ({Color bg, Color fg});
+
+class HToggleBtn extends StatefulWidget {
+  final EntireColorBundle toggleOnLook;
+  final EntireColorBundle toggleOffLook;
+  final IconData icon;
+  final double iconSize;
+  final void Function(bool) onTapListener;
+  final double padding;
+  const HToggleBtn(
+      {super.key,
+      required this.toggleOffLook,
+      required this.toggleOnLook,
+      required this.icon,
+      required this.iconSize,
+      required this.onTapListener,
+      required this.padding});
+
+  @override
+  State<HToggleBtn> createState() => _HToggleBtnState();
+}
+
+class _HToggleBtnState extends State<HToggleBtn> {
+  bool _toggled = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(widget.padding),
+      decoration: BoxDecoration(
+          color: _toggled
+              ? widget.toggleOnLook.bg
+              : widget.toggleOffLook.bg,
+          borderRadius: const BorderRadius.all(
+              Radius.circular(HalcyonLLaf.arcRadius))),
+      child: IconButton(
+          onPressed: () {
+            setState(() => _toggled = !_toggled);
+            widget.onTapListener.call(_toggled);
+          },
+          icon: Icon(widget.icon,
+              size: widget.iconSize,
+              color: _toggled
+                  ? widget.toggleOnLook.fg
+                  : widget.toggleOffLook.fg)),
+    );
+  }
+}
+
 class HDialog extends StatelessWidget {
   const HDialog({
     Key? key,
