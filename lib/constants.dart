@@ -1,7 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
-
 num clampFx(
         {required num value,
         required num lower,
@@ -11,7 +10,6 @@ num clampFx(
         : value > upper
             ? upper
             : value;
-
 
 const bool useDebugging = true;
 
@@ -26,6 +24,10 @@ Map<String, ({String path, AssetType type})> assetPaths = {
   ),
   "rimworldOST": (
     path: "moosic/rimworldost.mp3",
+    type: AssetType.audio
+  ),
+  "cloudSurfing": (
+    path: "moosic/cloud-surfing.mp3",
     type: AssetType.audio
   ),
   "defaultAlbumArt": (
