@@ -5,7 +5,7 @@
 
 **`Work-In-Progress`**
 
-![image](https://github.com/exoad/HalcyonLite/assets/45053009/c21aee28-7eba-45b5-b81a-f5ec84dc6ec4)
+![image](https://github.com/exoad/HalcyonLite/assets/45053009/2e523c97-b60a-40c4-aa44-fd0df63c947b)
 
 A smaller Halcyon player written in Flutter.
 </div>
