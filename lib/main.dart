@@ -19,7 +19,7 @@ void main() {
   runApp(const HalcyonApp());
   initDiscordRPC();
 
-  mainPlayer.setSource(HassetContract.assetAudio["rimworldOST"]!);
+  mainPlayer.setSource(HassetContract.assetAudio["cloudSurfing"]!);
 }
 
 class HalcyonApp extends StatelessWidget {
