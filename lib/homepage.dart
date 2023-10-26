@@ -318,7 +318,7 @@ class _MoosicTextInfoState extends State<MoosicTextInfo> {
                   text: mainPlayer.tag?.album ?? "Unknown",
                   bg: PoprockLaF.primary2,
                   textStyle: const TextStyle(
-                      fontSize: 12, fontWeight: FontWeight.w800)),
+                      fontSize: 12, fontWeight: FontWeight.w700)),
           ]),
           const SizedBox(height: 4),
           Row(children: [
@@ -469,7 +469,7 @@ class _AlbumArtState extends State<AlbumArt> {
       child: Center(
         child: mainPlayer.tag != null
             ? Padding(
-                padding: const EdgeInsets.all(24),
+                padding: const EdgeInsets.all(46),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(
                       Radius.circular(HalcyonLLaf.arcRadius)),
@@ -531,6 +531,7 @@ class MasterTagsState extends State<MasterTags> {
     return SizedBox(
       height: 24,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: tags.values.toList(),
       ),
     );
