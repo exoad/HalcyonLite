@@ -19,6 +19,7 @@ class HalcyonLLaf {
   static const double playbackControlsButtonSpacing = 15;
   static const double secondaryMoosicInfoFontSize = 14;
   static const double primaryMoosicInfoFontSize = 20;
+  static const double allTagFontSize = 14;
   static const bool useSlidingPrimaryTitleText =
       false; // TODO: implement this functionality for the primary music title when it is overflowing
 }

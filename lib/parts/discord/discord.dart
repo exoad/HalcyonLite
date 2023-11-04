@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:discord_rpc/discord_rpc_native.dart';
 import 'package:discord_rpc/model/discord_presence.dart';
 import 'package:flutter/material.dart';
-import 'package:halcyon_lite/parts/tailwind/tailwind.dart';
-import 'package:halcyon_lite/parts/util.dart';
+import 'package:halcyon_lite/parts/parts.dart';
 
 const String DISCORDPRC_APPLICATION_ID = "1163235279147126886";
 

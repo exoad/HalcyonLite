@@ -1,11 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:halcyon_lite/parts/apps.dart';
-import 'package:halcyon_lite/parts/constants.dart';
-import 'package:halcyon_lite/parts/laf.dart';
-import 'package:halcyon_lite/parts/tailwind/tailwind.dart';
-import 'package:halcyon_lite/parts/util.dart';
-
+import 'package:halcyon_lite/parts/parts.dart';
 
 class TopLayerHome extends StatelessWidget {
   const TopLayerHome({
