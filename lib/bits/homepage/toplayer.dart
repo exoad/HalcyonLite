@@ -1,80 +1,11 @@
-import 'dart:ui';
-
 import 'package:audioplayers/audioplayers.dart';
-/*------------------------------------------ /
-/ import 'package:audiotags/audiotags.dart'; /
-/-------------------------------------------*/
 import 'package:flutter/material.dart';
-import 'package:halcyon_lite/apps/apps.dart';
-import 'package:halcyon_lite/constants.dart';
-import 'package:halcyon_lite/laf.dart';
-import 'package:halcyon_lite/tailwind.dart';
-import 'package:halcyon_lite/util.dart';
+import 'package:halcyon_lite/parts/apps.dart';
+import 'package:halcyon_lite/parts/constants.dart';
+import 'package:halcyon_lite/parts/laf.dart';
+import 'package:halcyon_lite/parts/tailwind/tailwind.dart';
+import 'package:halcyon_lite/parts/util.dart';
 
-class HalcyonHome extends StatelessWidget {
-  const HalcyonHome({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(children: [
-        BottomLayerHome(),
-        TopLayerHome(),
-      ]),
-    );
-  }
-}
-
-class BottomLayerHome extends StatefulWidget {
-  const BottomLayerHome({
-    super.key,
-  });
-
-  @override
-  State<BottomLayerHome> createState() => _BottomLayerHomeState();
-}
-
-class _BottomLayerHomeState extends State<BottomLayerHome> {
-  @override
-  void initState() {
-    super.initState();
-    mainPlayer.tagStream.listen((_) => setState(() {}));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.centerLeft,
-      children: [
-        ImageFiltered(
-          imageFilter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-          child: mainPlayer.tag != null
-              ? Image.memory(
-                  mainPlayer.tag!.pictures[0].bytes,
-                  fit: BoxFit.cover,
-                  scale: MediaQuery.of(context).devicePixelRatio,
-                )
-              : Image(
-                  fit: BoxFit.cover,
-                  image:
-                      HassetContract.assetImages["defaultAlbumArt"]!,
-                ),
-        ),
-        Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Colors.transparent, Colors.black],
-              stops: [0.2, 0.75],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 class TopLayerHome extends StatelessWidget {
   const TopLayerHome({
@@ -594,3 +525,4 @@ class _HPlaybackButtonState extends State<_HPlaybackButton> {
     );
   }
 }
+

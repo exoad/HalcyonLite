@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:halcyon_lite/laf.dart';
+import 'package:halcyon_lite/parts/laf.dart';
 
 Widget createSimpleButton(IconData icon, Function() onPressed,
     {Color fg = PoprockLaF.bg,

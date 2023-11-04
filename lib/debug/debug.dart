@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:halcyon_lite/tailwind.dart';
-import 'package:halcyon_lite/util.dart';
+import 'package:halcyon_lite/parts/tailwind/tailwind.dart';
+import 'package:halcyon_lite/parts/util.dart';
 
 typedef DebuggerOverlook = ChangeNotifier;
 

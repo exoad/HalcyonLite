@@ -1,8 +1,8 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:halcyon_lite/laf.dart';
-import 'package:halcyon_lite/tailwind.dart';
-import 'package:halcyon_lite/util.dart';
+import 'package:halcyon_lite/parts/laf.dart';
+import 'package:halcyon_lite/parts/tailwind/tailwind.dart';
+import 'package:halcyon_lite/parts/util.dart';
 
 class TailwindDurationSeek extends StatefulWidget {
   const TailwindDurationSeek({super.key});

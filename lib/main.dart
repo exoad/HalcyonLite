@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:halcyon_lite/apps/discord.dart';
-import 'package:halcyon_lite/constants.dart';
-import 'package:halcyon_lite/homepage.dart';
-import 'package:halcyon_lite/laf.dart';
-import 'package:halcyon_lite/tailwind.dart';
+import 'package:halcyon_lite/parts/discord/discord.dart';
+import 'package:halcyon_lite/bits/bits.dart';
+import 'package:halcyon_lite/parts/parts.dart';
 import 'package:window_manager/window_manager.dart';
 
 void main() {
