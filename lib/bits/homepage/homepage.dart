@@ -3,7 +3,7 @@
 /-------------------------------------------*/
 import 'package:flutter/material.dart';
 import 'package:halcyon_lite/bits/homepage/bottomlayer.dart';
-import 'package:halcyon_lite/bits/homepage/toplayer.dart';
+import 'package:halcyon_lite/bits/homepage/top_player.dart';
 
 class HalcyonHome extends StatelessWidget {
   const HalcyonHome({Key? key}) : super(key: key);

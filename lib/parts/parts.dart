@@ -1,9 +1,9 @@
 export 'tailwind/tailwind.dart';
 export 'laf.dart';
 export 'constants.dart';
+export 'apps.dart';
 import 'package:flutter/material.dart';
 import 'package:halcyon_lite/parts/laf.dart';
-
 
 Widget createSimpleButton(IconData icon, Function() onPressed,
     {Color fg = PoprockLaF.bg,
