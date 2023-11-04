@@ -42,10 +42,14 @@ class _BottomLayerHomeState extends State<BottomLayerHome> {
         Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Colors.transparent, Colors.black],
-              stops: [0.2, 0.75],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Colors.transparent,
+                Color.fromARGB(120, 0, 0, 0),
+                Color.fromARGB(150, 0, 0, 0),
+              ],
+              stops: [0, 0.55, 0.65],
             ),
           ),
         ),

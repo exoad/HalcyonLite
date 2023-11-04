@@ -44,6 +44,10 @@ class HAudioPlayer with ChangeNotifier {
       }
       _tagStreamController.sink.add(tag!);
     });
+    player.onPlayerStateChanged.listen((event) =>
+        print("[AUDIO]: State [${event.name.toUpperCase()}]"));
+        player.eventStream.listen((event) => print("[AUDIO]: Event [${event.toString().toUpperCase()}]"));
+    player.onLog.listen((msg) => print("[AUDIO]: $msg"));
   }
 
   @override

@@ -2,7 +2,7 @@
 / import 'package:audiotags/audiotags.dart'; /
 /-------------------------------------------*/
 import 'package:flutter/material.dart';
-import 'package:halcyon_lite/bits/homepage/bottomlayer.dart';
+import 'package:halcyon_lite/bits/homepage/bottom_layer.dart';
 import 'package:halcyon_lite/bits/homepage/top_player.dart';
 
 class HalcyonHome extends StatelessWidget {
